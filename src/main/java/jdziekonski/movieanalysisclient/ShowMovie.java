@@ -1,22 +1,7 @@
 package jdziekonski.movieanalysisclient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.ws.rs.core.Response;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 public class ShowMovie extends javax.swing.JFrame {
 
@@ -138,7 +123,6 @@ public class ShowMovie extends javax.swing.JFrame {
             String idTaker = idField.getText();
             MovieAnalysis client = new MovieAnalysis();
             String movieJson = client.getMovieJson("http://localhost:8080/MovieAnalysisService/webresources/generic/movie", idTaker);
-            
             ObjectMapper mapper = new ObjectMapper();
             Movie m = mapper.readValue(movieJson, Movie.class);
             titleField.setText(m.getTitle());
@@ -146,7 +130,8 @@ public class ShowMovie extends javax.swing.JFrame {
             posField.setText(String.valueOf(m.getPositiveSentimentCounter()));
             negField.setText(String.valueOf(m.getNegativeSentimentCounter()));
             
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
         
@@ -154,12 +139,9 @@ public class ShowMovie extends javax.swing.JFrame {
     }//GEN-LAST:event_showButtonActionPerformed
 
     private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_titleFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

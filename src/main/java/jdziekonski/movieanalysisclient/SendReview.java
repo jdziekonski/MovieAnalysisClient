@@ -1,21 +1,11 @@
 package jdziekonski.movieanalysisclient;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JOptionPane;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 public class SendReview extends javax.swing.JFrame {
 
@@ -95,35 +85,27 @@ public class SendReview extends javax.swing.JFrame {
     private void sendReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendReviewButtonActionPerformed
         String idTaker = idField.getText();
         String reviewTaker = reviewField.getText();
-	
         try {
             URL url = new URL("http://localhost:8080/MovieAnalysisService/webresources/generic/movieReview/"+idTaker);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-
             String input = reviewTaker;
-            
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
             os.flush();
-            
             if (conn.getResponseCode() == 200){
                 JOptionPane.showMessageDialog(null, "Review added!");
                 this.dispose();
                 System.out.println("Response Code: "+ conn.getResponseCode());
             }
-
             conn.disconnect();
-
-	} catch (MalformedURLException e) {
-
+	}
+        catch (MalformedURLException e) {
 		e.printStackTrace();
-
-	} catch (IOException e) {
-
+	} 
+        catch (IOException e) {
 		e.printStackTrace();
-
 	}
     }//GEN-LAST:event_sendReviewButtonActionPerformed
 
@@ -131,9 +113,6 @@ public class SendReview extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_reviewFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
